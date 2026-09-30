@@ -6,6 +6,7 @@ export class BankManagerMainPage {
     this.addCustomerButton = page.getByRole('button', { name: 'Add Customer', exact: true });
     this.openAccountButton = page.getByRole('button', {name: 'Open Account', exact: true });
     this.customersButton = page.getByRole('button', {name: 'Customers', exact: true });
+    this.homeButton = page.getByRole('button', { name: 'Home', exact: true });
   }
 
   async open() {
@@ -32,6 +33,9 @@ export class BankManagerMainPage {
     await expect(this.customersButton).toBeVisible();
   }
 
+  async clickHomeButton() {
+    await this.homeButton.click();
+  }
 
   
 }
