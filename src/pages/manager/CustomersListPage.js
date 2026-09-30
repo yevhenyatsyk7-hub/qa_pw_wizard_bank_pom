@@ -30,4 +30,8 @@ export class CustomersListPage {
   async assertLastRowAccountNumberIsEmpty() {
     await expect(this.lastRowAccountNumberCell).toHaveText('');
   }
+
+  async assertLastRowAccountNumberIsNotEmpty() {
+    await expect(this.lastRowAccountNumberCell).toHaveText(/\d+/);
+  }
 }
