@@ -9,6 +9,7 @@ export class CustomersListPage {
     this.lastRowLastNameCell = this.lastRow.getByRole('cell').nth(1);
     this.lastRowPostCodeCell = this.lastRow.getByRole('cell').nth(2);
     this.lastRowAccountNumberCell = this.lastRow.getByRole('cell').nth(3);
+    this.searchField = page.getByPlaceholder('Search Customer');
   }
 
   async open() {
@@ -56,5 +57,19 @@ export class CustomersListPage {
 
   async reload() {
     await this.page.reload();
+  }
+
+  async fillSearchField(text) {
+    await this.searchField.fill(text);
+  }
+
+  async assertCustomerRowIsVisible(firstName, lastName, postCode) {
+    await expect(
+      this.getCustomerRow(firstName, lastName, postCode),
+    ).toBeVisible();
+  }
+
+  async assertRowsCount(count) {
+    await expect(this.rows).toHaveCount(count);
   }
 }
