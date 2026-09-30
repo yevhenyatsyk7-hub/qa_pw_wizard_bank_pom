@@ -15,6 +15,25 @@ export class CustomersListPage {
     await this.page.goto('/angularJs-protractor/BankingProject/#/manager/list');
   }
 
+  getCustomerRow(firstName, lastName, postCode) {
+    return this.rows
+      .filter({ hasText: firstName })
+      .filter({ hasText: lastName })
+      .filter({ hasText: postCode });
+  }
+
+  async clickDeleteForCustomer(firstName, lastName, postCode) {
+    await this.getCustomerRow(firstName, lastName, postCode)
+      .getByRole('button', { name: 'Delete' })
+      .click();
+  }
+
+  async assertCustomerRowIsNotPresent(firstName, lastName, postCode) {
+    await expect(
+      this.getCustomerRow(firstName, lastName, postCode),
+    ).toHaveCount(0);
+  }
+
   async assertLastRowFirstNameContainsText(text) {
     await expect(this.lastRowFirstNameCell).toContainText(text);
   }
@@ -33,5 +52,9 @@ export class CustomersListPage {
 
   async assertLastRowAccountNumberIsNotEmpty() {
     await expect(this.lastRowAccountNumberCell).toHaveText(/\d+/);
+  }
+
+  async reload() {
+    await this.page.reload();
   }
 }
