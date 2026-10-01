@@ -33,4 +33,8 @@ export class OpenAccountPage {
   async assertCurrencyDropDownHasValue(value) {
     await expect(this.currencyDropDown).toHaveValue(value);
   }
+
+  async assertCustomerDropDownIsInvalid() {
+    await expect(this.customerDropDown).toHaveClass(/ng-invalid-required/);
+  }
 }
